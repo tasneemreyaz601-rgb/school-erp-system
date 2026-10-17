@@ -3,82 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Education Desk - Modern School Management</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Education Desk - School ERP System</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f7f6; color: #333; }
+        .navbar { background-color: #1e293b; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
+        .navbar .logo { font-size: 20px; font-weight: bold; }
+        .user-info button { background: #ef4444; border: none; color: white; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+        .main-container { display: flex; height: calc(100vh - 60px); }
+        .sidebar { width: 250px; background-color: #ffffff; border-right: 1px solid #ddd; padding-top: 20px; }
+        .sidebar ul li { padding: 15px 25px; cursor: pointer; list-style: none; font-weight: 500; transition: 0.3s; }
+        .sidebar ul li:hover, .sidebar ul li.active { background-color: #e2e8f0; color: #2563eb; border-left: 4px solid #2563eb; }
+        .content { flex: 1; padding: 30px; overflow-y: auto; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .cards-grid { display: flex; gap: 20px; margin-top: 20px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); flex: 1; text-align: center; }
+        .card h3 { color: #64748b; font-size: 16px; }
+        .card p { font-size: 24px; font-weight: bold; color: #2563eb; margin-top: 10px; }
+        .form-box { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .form-box input, .form-box select { padding: 10px; margin-right: 10px; border: 1px solid #ccc; border-radius: 4px; width: 250px; margin-bottom: 10px; }
+        .form-box button, .tab-content button { padding: 10px 20px; background-color: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        table { width: 100%; background: white; border-collapse: collapse; margin-top: 15px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        table th, table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #eee; }
+        table th { background-color: #f8fafc; }
+    </style>
 </head>
 <body>
 
-    <!-- Top Header -->
-    <header class="main-header">
-        <div class="logo-area">
-            <div class="logo-icon">E</div>
-            <div>
-                <h2>Education Desk</h2>
-                <p>Modern school management</p>
-            </div>
-        </div>
-        <div class="menu-icon" onclick="toggleMenu()">
-            <i class="fa-solid fa-bars"></i>
-        </div>
+    <header class="navbar">
+        <div class="logo">🎓 Education Desk ERP</div>
+        <div class="user-info">नमस्ते, अंकल जी | <button onclick="alert('लॉग आउट हो गए')">लॉग आउट</button></div>
     </header>
 
-    <!-- Main Container / Modules Grid -->
-    <div class="container">
-        <div class="section-title">Modules</div>
-        <p class="section-desc">Everything your school needs in one ERP. Bring academics, administration and communication together.</p>
+    <div class="main-container">
+        <aside class="sidebar">
+            <ul>
+                <li class="active" onclick="switchTab('dashboard', this)">📊 डैशबोर्ड</li>
+                <li onclick="switchTab('students', this)">👨‍🎓 छात्र प्रबंधन (Students)</li>
+                <li onclick="switchTab('attendance', this)">📅 उपस्थिति (Attendance)</li>
+                <li onclick="switchTab('fees', this)">💰 फीस और भुगतान (Fees)</li>
+            </ul>
+        </aside>
 
-        <div class="modules-grid">
-            <!-- Card 1 -->
-            <div class="feature-card" onclick="openModule('Student Information System')">
-                <div class="card-top-icon bg-orange"><i class="fa-solid fa-user-graduate"></i></div>
-                <h3>Student Information System</h3>
-                <p>Store full student profiles with guardians, documents, previous schools and custom fields.</p>
-                <span class="badge">Unlimited students</span>
-            </div>
+        <main class="content">
+            <section id="dashboard" class="tab-content active">
+                <h2>स्कूल का मुख्य डैशबोर्ड</h2>
+                <div class="cards-grid">
+                    <div class="card"><h3>कुल छात्र</h3><p>121</p></div>
+                    <div class="card"><h3>आज की उपस्थिति</h3><p>95%</p></div>
+                    <div class="card"><h3>कुल फीस जमा</h3><p>₹ 4,50,000</p></div>
+                </div>
+            </section>
 
-            <!-- Card 2 -->
-            <div class="feature-card" onclick="openModule('Attendance & Timetable')">
-                <div class="card-top-icon bg-orange"><i class="fa-solid fa-calendar-days"></i></div>
-                <h3>Attendance & Timetable</h3>
-                <p>Mark class-wise attendance in seconds and send instant absentee SMS or app notifications.</p>
-                <span class="badge">Web + Mobile</span>
-            </div>
+            <section id="students" class="tab-content">
+                <h2>छात्र पंजीकरण और सूची</h2>
+                <div class="form-box">
+                    <h3>नया छात्र जोड़ें</h3>
+                    <input type="text" id="sName" placeholder="छात्र का नाम">
+                    <input type="text" id="sClass" placeholder="कक्षा (जैसे: 10वीं)">
+                    <button onclick="addStudent()">छात्र जोड़ें</button>
+                </div>
+                <table id="sTable">
+                    <tr><th>नाम</th><th>कक्षा</th><th>स्थिति</th></tr>
+                    <tr><td>राहुल कुमार</td><td>10वीं</td><td>सक्रिय</td></tr>
+                </table>
+            </section>
 
-            <!-- Card 3 -->
-            <div class="feature-card" onclick="openModule('Fees & Online Payments')">
-                <div class="card-top-icon bg-orange"><i class="fa-solid fa-file-invoice-dollar"></i></div>
-                <h3>Fees & Online Payments</h3>
-                <p>Flexible fee structures, reminders, receipts and gateway integration for hassle-free collection.</p>
-                <span class="badge">Payment-ready</span>
-            </div>
+            <section id="attendance" class="tab-content">
+                <h2>दैनिक उपस्थिति (Attendance)</h2>
+                <div class="form-box">
+                    <select id="clsOpt">
+                        <option>कक्षा 9वीं</option>
+                        <option>कक्षा 10वीं</option>
+                        <option>कक्षा 12वीं</option>
+                    </select>
+                    <br>
+                    <button onclick="markAtt()">उपस्थिति सुरक्षित करें</button>
+                    <p id="attMsg" style="color: green; margin-top: 10px;"></p>
+                </div>
+            </section>
 
-            <!-- Card 4 -->
-            <div class="feature-card" onclick="openModule('Exams & Report Cards')">
-                <div class="card-top-icon bg-orange"><i class="fa-solid fa-award"></i></div>
-                <h3>Exams & Report Cards</h3>
-                <p>Create exam patterns, enter marks and publish digital report cards in a single click.</p>
-                <span class="badge">CBSE / State / Custom</span>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="feature-card" onclick="openModule('Parent Communication')">
-                <div class="card-top-icon bg-orange"><i class="fa-solid fa-comments"></i></div>
-                <h3>Parent Communication</h3>
-                <p>Share homework, announcements and results instantly via app notifications, email and SMS.</p>
-                <span class="badge">Multi-channel</span>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="feature-card" onclick="openModule('Transport & GPS')">
-                <div class="card-top-icon bg-orange"><i class="fa-solid fa-bus"></i></div>
-                <h3>Transport & GPS</h3>
-                <p>Maintain buses, routes and stops, and optionally plug-in live tracking for parents.</p>
-                <span class="badge">Optional add-on</span>
-            </div>
-        </div>
+            <section id="fees" class="tab-content">
+                <h2>फीस प्रबंधन</h2>
+                <div class="form-box">
+                    <input type="text" id="fName" placeholder="छात्र का नाम">
+                    <input type="number" id="fAmt" placeholder="फीस राशि (₹)"><br>
+                    <button onclick="payFee()">फीस जमा करें</button>
+                    <p id="feeMsg" style="color: green; margin-top: 10px;"></p>
+                </div>
+            </section>
+        </main>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        function switchTab(id, el) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.sidebar ul li').forEach(l => l.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            el.classList.add('active');
+        }
+
+        function addStudent() {
+            let name = document.getElementById('sName').value;
+            let cls = document.getElementById('sClass').value;
+            if(!name || !cls) { alert('कृपया सभी फील्ड भरें!'); return; }
+            let table = document.getElementById('sTable');
+            let row = table.insertRow();
+            row.innerHTML = `<td>${name}</td><td>${cls}</td><td>सक्रिय</td>`;
+            document.getElementById('sName').value = '';
+            document.getElementById('sClass').value = '';
+            alert('छात्र सफलतापूर्वक जुड़ गया!');
+        }
+
+        function markAtt() {
+            let c = document.getElementById('clsOpt').value;
+            document.getElementById('attMsg').innerText = c + ' की उपस्थिति दर्ज हो गई है!';
+        }
+
+        function payFee() {
+            let n = document.getElementById('fName').value;
+            let a = document.getElementById('fAmt').value;
+            if(!n || !a) { alert('कृपया नाम और राशि भरें!'); return; }
+            document.getElementById('feeMsg').innerText = `${n} की ₹${a} फीस जमा हो गई है!`;
+            document.getElementById('fName').value = '';
+            document.getElementById('fAmt').value = '';
+        }
+    </script>
 </body>
 </html>
