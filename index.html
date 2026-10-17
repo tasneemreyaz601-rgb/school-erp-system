@@ -3,123 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Education Desk - School Management ERP</title>
+    <title>Education Desk - Modern School Management</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- Left Sidebar -->
-    <aside class="sidebar">
-        <div class="brand">
-            <i class="fa-solid fa-graduation-cap"></i>
-            <h2>Education Desk</h2>
-        </div>
-        <ul class="nav-menu">
-            <li class="active" onclick="showPage('dashboard', this)"><i class="fa-solid fa-chart-pie"></i> Dashboard</li>
-            <li onclick="showPage('students', this)"><i class="fa-solid fa-users"></i> Student Directory</li>
-            <li onclick="showPage('admission', this)"><i class="fa-solid fa-user-plus"></i> New Admission</li>
-            <li onclick="showPage('fees', this)"><i class="fa-solid fa-file-invoice-dollar"></i> Fee Management</li>
-        </ul>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <header class="top-bar">
-            <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Search student, roll no, class...">
+    <!-- Top Header -->
+    <header class="main-header">
+        <div class="logo-area">
+            <div class="logo-icon">E</div>
+            <div>
+                <h2>Education Desk</h2>
+                <p>Modern school management</p>
             </div>
-            <div class="user-info">
-                <span class="status-online"><i class="fa-solid fa-circle"></i> Live ERP</span>
-                <div class="profile">
-                    <i class="fa-solid fa-circle-user"></i> Admin Panel
-                </div>
-            </div>
-        </header>
-
-        <div class="page-container">
-            <!-- DASHBOARD -->
-            <section id="dashboard" class="page active">
-                <div class="page-header">
-                    <h1>School Operations Hub</h1>
-                    <span class="session-info">Academic Session 2026-27</span>
-                </div>
-                <div class="stats-cards">
-                    <div class="card blue">
-                        <div><p>Attendance Rate</p><h2>92.9%</h2><small>Target: 95%</small></div>
-                        <i class="fa-solid fa-user-check card-icon"></i>
-                    </div>
-                    <div class="card green">
-                        <div><p>Monthly Fees Collected</p><h2>₹ 18,45,200</h2><small class="green-text">This Month</small></div>
-                        <i class="fa-solid fa-indian-rupee-sign card-icon"></i>
-                    </div>
-                    <div class="card red">
-                        <div><p>Pending Dues</p><h2>₹ 2,60,000</h2><small class="red-text">Action Required</small></div>
-                        <i class="fa-solid fa-triangle-exclamation card-icon"></i>
-                    </div>
-                </div>
-                <div class="box">
-                    <h3><i class="fa-solid fa-list-check"></i> Recent Activity Log</h3>
-                    <ul id="activityLog" class="log-list">
-                        <li><span class="dot green"></span> System Initialized - ERP Website Ready</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- STUDENT DIRECTORY -->
-            <section id="students" class="page">
-                <div class="page-header"><h1>Student Directory</h1></div>
-                <div class="box">
-                    <table class="data-table">
-                        <thead>
-                            <tr><th>Roll No</th><th>Student Name</th><th>Father's Name</th><th>Class</th><th>Phone</th></tr>
-                        </thead>
-                        <tbody id="studentTableBody"></tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- ADMISSION FORM -->
-            <section id="admission" class="page">
-                <div class="page-header"><h1>New Student Admission</h1></div>
-                <div class="box form-box">
-                    <form id="admissionForm" onsubmit="saveStudent(event)">
-                        <div class="form-row">
-                            <div class="form-group"><label>Student Full Name</label><input type="text" id="stdName" required placeholder="Enter student name"></div>
-                            <div class="form-group"><label>Father's Name</label><input type="text" id="fatherName" required placeholder="Enter father name"></div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group"><label>Class</label>
-                                <select id="stdClass" required>
-                                    <option value="">Select Class</option>
-                                    <option value="Nursery">Nursery</option><option value="LKG">LKG</option><option value="UKG">UKG</option>
-                                    <option value="1st">1st</option><option value="2nd">2nd</option><option value="3rd">3rd</option>
-                                    <option value="4th">4th</option><option value="5th">5th</option><option value="6th">6th</option>
-                                    <option value="7th">7th</option><option value="8th">8th</option><option value="9th">9th</option>
-                                    <option value="10th">10th</option><option value="11th">11th</option><option value="12th">12th</option>
-                                </select>
-                            </div>
-                            <div class="form-group"><label>Phone Number</label><input type="tel" id="stdPhone" required placeholder="Enter phone number"></div>
-                        </div>
-                        <button type="submit" class="btn-main">Submit & Save Student</button>
-                    </form>
-                </div>
-            </section>
-
-            <!-- FEE MANAGEMENT -->
-            <section id="fees" class="page">
-                <div class="page-header"><h1>Fee Management</h1></div>
-                <div class="box form-box">
-                    <form onsubmit="processFee(event)">
-                        <div class="form-group"><label>Student Name</label><input type="text" id="feeStudentName" required placeholder="Enter student name"></div>
-                        <div class="form-group"><label>Fee Amount (₹)</label><input type="number" id="feeAmount" required placeholder="Enter amount"></div>
-                        <button type="submit" class="btn-main">Generate Receipt</button>
-                    </form>
-                </div>
-            </section>
         </div>
-    </main>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </header>
+
+    <!-- Main Container / Modules Grid -->
+    <div class="container">
+        <div class="section-title">Modules</div>
+        <p class="section-desc">Everything your school needs in one ERP. Bring academics, administration and communication together.</p>
+
+        <div class="modules-grid">
+            <!-- Card 1 -->
+            <div class="feature-card" onclick="openModule('Student Information System')">
+                <div class="card-top-icon bg-orange"><i class="fa-solid fa-user-graduate"></i></div>
+                <h3>Student Information System</h3>
+                <p>Store full student profiles with guardians, documents, previous schools and custom fields.</p>
+                <span class="badge">Unlimited students</span>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="feature-card" onclick="openModule('Attendance & Timetable')">
+                <div class="card-top-icon bg-orange"><i class="fa-solid fa-calendar-days"></i></div>
+                <h3>Attendance & Timetable</h3>
+                <p>Mark class-wise attendance in seconds and send instant absentee SMS or app notifications.</p>
+                <span class="badge">Web + Mobile</span>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="feature-card" onclick="openModule('Fees & Online Payments')">
+                <div class="card-top-icon bg-orange"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                <h3>Fees & Online Payments</h3>
+                <p>Flexible fee structures, reminders, receipts and gateway integration for hassle-free collection.</p>
+                <span class="badge">Payment-ready</span>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="feature-card" onclick="openModule('Exams & Report Cards')">
+                <div class="card-top-icon bg-orange"><i class="fa-solid fa-award"></i></div>
+                <h3>Exams & Report Cards</h3>
+                <p>Create exam patterns, enter marks and publish digital report cards in a single click.</p>
+                <span class="badge">CBSE / State / Custom</span>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="feature-card" onclick="openModule('Parent Communication')">
+                <div class="card-top-icon bg-orange"><i class="fa-solid fa-comments"></i></div>
+                <h3>Parent Communication</h3>
+                <p>Share homework, announcements and results instantly via app notifications, email and SMS.</p>
+                <span class="badge">Multi-channel</span>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="feature-card" onclick="openModule('Transport & GPS')">
+                <div class="card-top-icon bg-orange"><i class="fa-solid fa-bus"></i></div>
+                <h3>Transport & GPS</h3>
+                <p>Maintain buses, routes and stops, and optionally plug-in live tracking for parents.</p>
+                <span class="badge">Optional add-on</span>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
